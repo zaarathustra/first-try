@@ -31,6 +31,7 @@ def separate_images(files,directory):
     resize(image_files)
     
 #converts into rgba, changes into transparent pixels for png, saves in png
+#using opencv insead of PIL bcause of more resizing args
 def convertImage(image_files_a):
     for image_file in image_files_a:
         img = Image.open(image_file)
