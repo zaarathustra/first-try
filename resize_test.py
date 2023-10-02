@@ -4,7 +4,7 @@ import re
 import os
 import sys
 from PIL import Image
-
+#checks for argument(dir or file), calls functions.
 def main():
     if len(sys.argv) > 1:
         if os.path.isdir(sys.argv[1]):
@@ -22,7 +22,7 @@ def main():
         separate_images(os.listdir(directory),directory)
         print(directory + "\\")
 
-    #search through the folder for the path to all jpg or png filles in the folder and store these vallues in image_file list
+#search through the folder for the path to all jpg or png filles in the folder and store these vallues in image_files list
 def separate_images(files,directory):
     image_files = []
     for file in files:
@@ -30,7 +30,7 @@ def separate_images(files,directory):
             image_files.append(directory + '\\' + file)
     resize(image_files)
     
-    
+#converts into rgba, changes into transparent pixels for png, saves in png
 def convertImage(image_files_a):
     for image_file in image_files_a:
         img = Image.open(image_file)
@@ -49,7 +49,7 @@ def convertImage(image_files_a):
         img.putdata(newData)
         img.save((image_file.rstrip(image_file[-3:]))+ 'png')
         print("Successful")
-    #for loop to iterate through all the files in the list calling resize function
+#resizes with opencv
 def resize(image_files):
     image_files_a = []
     for image_file in image_files:
@@ -70,7 +70,7 @@ def resize(image_files):
         
         print(image_file , "done")
     convertImage(image_files_a)
-
+#path for when input is a file, to get directory.
 def get_path(file):
     file = re.split(r"\\", file)
     new_path = "C:"
@@ -78,5 +78,3 @@ def get_path(file):
         new_path = new_path +"\\" + fil
     
     return str(new_path)
-#sys.argv = ['uhiuq', r"C:\Users\william\Downloads\New folder\morebull\another1.28\Ataegina-0.5-pc\AtaeginaActII-0.8.6-pc\AtaeginaActII-0.8.6-pc\game\unrpa\images\v71"]
-main()
